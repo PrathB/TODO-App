@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TODO</title>
-</head>
-<body>
-    <main>
-        <div class="main-card">
-            <h2>TO-DO LIST</h2>
-            <div class="input-div">
-                <input id="taskInput" type="text" placeholder="Add a task" />
-                <button id="addTaskBtn" >Add</button>
-            </div>
-            <ul class="scroll">
-               <li id="taskListItem"></li> 
-            </ul>
-            <hr>
-            <div>
-                <div class="counter-div">
-                    <p>Total tasks: <span id="taskCount">0</span></p>
-                </div>
-                <div class="delete-all-div">
-                    <button id="deleteAllButton">Delete All</button>
-                </div>
-            </div>
-        </div> 
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="main-card">
+      <h2>TO-DO LIST</h2>
+      <div class="input-div">
+        <input id="taskInput" type="text" placeholder="Add a task" />
+        <button id="addTaskBtn">Add</button>
+      </div>
+      <ul class="scroll">
+        <li id="taskListItem"></li>
+      </ul>
+      <div style="width: 100%;">
+        <hr />
+        <div class="bottom-div">
+          <div class="counter-div">
+            <p>Total tasks: <span id="taskCount">0</span></p>
+          </div>
+          <div class="delete-all-div">
+            <button id="deleteAllBtn">Delete All</button>
+          </div>
+        </div>
+      </div>
     </main>
-</body>
+  </body>
 </html>
