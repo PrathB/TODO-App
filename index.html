@@ -13,14 +13,18 @@
         <input id="taskInput" type="text" placeholder="Add a task" />
         <button id="addTaskBtn">Add</button>
       </div>
-      <ul class="scroll">
-        <li id="taskListItem"></li>
-      </ul>
-      <div style="width: 100%;">
+      <ul class="scroll"></ul>
+      <div style="width: 100%">
         <hr />
         <div class="bottom-div">
           <div class="counter-div">
-            <p>Total tasks: <span id="taskCount">0</span></p>
+            <p id="totalTasks">Total tasks: <span id="taskCount">0</span></p>
+            <p id="completedTasks">
+              Completed tasks: <span id="completedTaskCount">0</span>
+            </p>
+            <p id="pendingTasks">
+              Pending tasks: <span id="pendingTaskCount">0</span>
+            </p>
           </div>
           <div class="delete-all-div">
             <button id="deleteAllBtn">Delete All</button>
@@ -28,5 +32,6 @@
         </div>
       </div>
     </main>
+    <script src="script.js"></script>
   </body>
 </html>

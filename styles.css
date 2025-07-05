@@ -1,9 +1,10 @@
 :root {
   --gradient: linear-gradient(180deg, #34e5ff 0%, #3185fc 100%);
   --grey-border: #b0b0b0;
+  --grey-text: #7b7b7b;
   --color-primary: #3185fc;
   --color-accent: #34e5ff;
-  --success-green:#4bb543;
+  --success-green: #4bb543;
 }
 
 * {
@@ -61,7 +62,7 @@ h2 {
   height: 3rem;
   padding: 1rem;
   margin-right: 0.5rem;
-  border: 0.5px solid var(--grey-border) ;
+  border: 0.5px solid var(--grey-border);
   border-radius: 5px;
 }
 
@@ -70,49 +71,78 @@ h2 {
   font-size: 1rem;
   color: white;
   border: none;
-  background-color:var(--color-primary);
+  background-color: var(--color-primary);
   border-radius: 5px;
   cursor: pointer;
 }
 
-ul{
-    padding: 0;
-    margin: 0;
-    overflow-y: scroll;
+ul {
+  padding: 0.5rem;
+  margin: 0;
+  overflow-y: auto;
+  height: 15rem;
+  width: 100%;
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-primary) transparent;
+  margin-top: 1rem;
 }
 
-li{
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    padding: 1.3rem;
+li {
+  border-radius: 8px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  padding: 0.6rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-#taskListitem p{
-    color: black;
+li div {
+  display: flex;
+  padding: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.disabled{
-    display: flex;
-    text-decoration: line-through;
+.disabled {
+  text-decoration: line-through;
+  color: var(--grey-text);
 }
 
-input[type="checkbox"]::before{
-    content: "\2713";
-    display: "inline-block";
-    width: 2rem;
-    height: 2rem;
-    font-size: 1.7rem;
-    text-align: center;
-    border: 0.25px solid var(--grey-border);
-    border-radius: 50%;
-    color: transparent;    
+.custom-checkbox input[type="checkbox"] {
+  display: none;
 }
 
-input[type="checkbox"]::before::after{
-    color: white; 
-    background-color: var(--success-green);
-    border: 0.25px solid var(--success-green);
+/* Style custom checkbox box */
+.custom-checkbox .checkmark {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 1px solid var(--grey-border);
+  border-radius: 50%;
+  background-color: transparent;
+  margin-right: 1rem;
+  vertical-align: middle;
+  position: relative;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.custom-checkbox .checkmark::after {
+  content: "\2713";
+  font-weight: 900;
+  color: white;
+  display: none;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  background-color: var(--success-green);
+  border-color: black;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  display: block;
 }
 
 hr {
@@ -124,37 +154,28 @@ hr {
   opacity: 0.5;
 }
 
-.bottom-div{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
+.bottom-div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
-#deleteAllBtn{
-    font-size: 1rem;
-    color: grey;
-    border:none;
-    background-color: transparent;
-    cursor: pointer;
+.counter-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
-.scroll{
-    height: 20rem;
-    width: 100%;
-    scrollbar-width: thin;
-    margin-top: 1rem;
+.counter-div p {
+  color: black;
 }
 
-.scroll::-webkit-scrollbar{
-    width: 0.6rem;
-}
-
-.scroll::-webkit-scrollbar-thumb{
-    background-color: var(--color-primary);
-    border-radius: 8px;
-}
-
-.scroll::-webkit-scrollbar-track{
-    display: none;
+#deleteAllBtn {
+  font-size: 1rem;
+  color: var(--grey-text);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
