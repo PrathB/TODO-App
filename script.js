@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCount();
 });
 
-
 // ➕ Function to add a task to taskArr
 function addTask() {
   const newTask = taskInput.value.trim();
@@ -49,14 +48,12 @@ function addTask() {
   displayTasks();
 }
 
-
 // ❌ Delete all tasks
 function deleteAllTasks() {
   taskArr.length = 0; // Clear array
   saveToLocalStorage();
   displayTasks();
 }
-
 
 // 🖼️ Display all tasks in the list
 function displayTasks() {
@@ -71,12 +68,14 @@ function displayTasks() {
     //        <span class="checkmark"></span>
     //      </label>
     //      <span class="text-span">Task Text</span>
+    //      <div class="drag-div">drag icon</div>
     //    </div>
     // </li>
 
     const li = document.createElement("li");
     li.id = `${index}`;
     li.className = task.disabled ? "disabled" : "";
+
 
     const taskContent = document.createElement("div");
     taskContent.className = "task-content";
@@ -99,16 +98,19 @@ function displayTasks() {
     text.className = "text-span";
     text.addEventListener("click", () => editTask(index)); // Enable editing on click
 
+    const drag = document.createElement("div");
+    drag.textContent = "≡";
+    drag.className = "drag-div";
+
     // Assemble DOM elements
     label.append(checkbox, checkmark);
-    taskContent.append(label, text);
+    taskContent.append(label, text, drag);
     li.appendChild(taskContent);
     taskList.appendChild(li);
   });
 
   updateCount(); // Refresh counts
 }
-
 
 // ✅ Toggle task completed/incomplete
 function toggleTask(taskIndex) {
@@ -117,12 +119,10 @@ function toggleTask(taskIndex) {
   displayTasks();
 }
 
-
 // 💾 Save current taskArr to local storage
 function saveToLocalStorage() {
   localStorage.setItem("taskArr", JSON.stringify(taskArr));
 }
-
 
 // 🔢 Update task counts: total, completed, and pending
 function updateCount() {
@@ -133,7 +133,6 @@ function updateCount() {
 
   pendingTaskCount.textContent = taskArr.length - completedCount;
 }
-
 
 // ✏️ Replace task text with input field for editing
 function editTask(index) {
@@ -157,7 +156,6 @@ function editTask(index) {
   textSpan.replaceWith(input);
   input.focus();
 }
-
 
 // 💾 Save edited task text
 function saveEdit(index, inputElement) {
