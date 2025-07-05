@@ -3,7 +3,7 @@ let taskArr = JSON.parse(localStorage.getItem("taskArr")) || [];
 
 // 📌 Accessing necessary DOM elements
 const taskInput = document.querySelector("#taskInput");
-const taskList = document.querySelector(".scroll");
+const taskList = document.querySelector("#taskList");
 
 const taskCount = document.querySelector("#taskCount");
 const completedtaskCount = document.querySelector("#completedTaskCount");
@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Display initial task list and counts
   displayTasks();
+  initializeSortable();
   updateCount();
 });
 
@@ -75,7 +76,6 @@ function displayTasks() {
     const li = document.createElement("li");
     li.id = `${index}`;
     li.className = task.disabled ? "disabled" : "";
-
 
     const taskContent = document.createElement("div");
     taskContent.className = "task-content";
@@ -167,4 +167,26 @@ function saveEdit(index, inputElement) {
   }
 
   displayTasks(); // Refresh the UI
+}
+
+function initializeSortable() {
+  Sortable.create(taskList, {
+    animation: 150,
+    handle: ".drag-div",
+    onEnd: (e) => {
+      taskArr.length = 0;
+      const listItems = taskList.querySelectorAll("li");
+
+      listItems.forEach((li) => {
+        const data = {
+          text: li.querySelector(".text-span").textContent,
+          disabled: li.getAttribute("class") === "disabled" ? "true" : false,
+        };
+        taskArr.push(data);
+      });
+
+      saveToLocalStorage();
+      displayTasks();
+    },
+  });
 }
