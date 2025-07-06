@@ -12,6 +12,8 @@ const pendingTaskCount = document.querySelector("#pendingTaskCount");
 const addButton = document.querySelector("#addTaskBtn");
 const deleteAllButton = document.querySelector("#deleteAllBtn");
 
+const toggleButton = document.querySelector(".theme-toggle");
+
 // 🚀 Set up event listeners after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
   // Allow pressing Enter key to add a task
@@ -20,6 +22,14 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       addTask();
     }
+  });
+
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+
+  toggleButton.addEventListener("click", () => {
+    toggleTheme();
   });
 
   // Attach click listeners to buttons
@@ -189,4 +199,10 @@ function initializeSortable() {
       displayTasks();
     },
   });
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark-mode");
+  const theme = document.body.className === "dark-mode" ? "dark" : "light";
+  localStorage.setItem("theme", theme);
 }
