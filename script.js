@@ -1,7 +1,7 @@
-// 🔄 Retrieve task array from local storage or initialize with empty array
+// Retrieve task array from local storage or initialize with empty array
 let taskArr = JSON.parse(localStorage.getItem("taskArr")) || [];
 
-// 📌 Accessing necessary DOM elements
+// Accessing necessary DOM elements
 const taskInput = document.querySelector("#taskInput");
 const taskList = document.querySelector("#taskList");
 
@@ -14,9 +14,9 @@ const deleteAllButton = document.querySelector("#deleteAllBtn");
 
 const toggleButton = document.querySelector(".theme-toggle");
 
-// 🚀 Set up event listeners after the DOM is fully loaded
+// Set up event listeners after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-  // Allow pressing Enter key to add a task
+  // Add task when Enter key is pressed in the input field
   taskInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -24,25 +24,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Apply dark mode if previously selected
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
   }
 
+  // Toggle theme when toggle button is clicked
   toggleButton.addEventListener("click", () => {
     toggleTheme();
   });
 
-  // Attach click listeners to buttons
+  // Add task on button click
   addButton.addEventListener("click", addTask);
+
+  // Delete all tasks on button click
   deleteAllButton.addEventListener("click", deleteAllTasks);
 
-  // Display initial task list and counts
+  // Display tasks and initialize drag-and-drop
   displayTasks();
   initializeSortable();
+
+  // Update task counters
   updateCount();
 });
 
-// ➕ Function to add a task to taskArr
+// Add a new task to the task array
 function addTask() {
   const newTask = taskInput.value.trim();
 
@@ -53,36 +59,25 @@ function addTask() {
     });
   }
 
-  // Save and refresh UI
+  // Save updated task array and refresh UI
   saveToLocalStorage();
   taskInput.value = "";
   displayTasks();
 }
 
-// ❌ Delete all tasks
+// Remove all tasks
 function deleteAllTasks() {
-  taskArr.length = 0; // Clear array
+  taskArr.length = 0; // Clear task array
   saveToLocalStorage();
   displayTasks();
 }
 
-// 🖼️ Display all tasks in the list
+// Display all tasks in the task list
 function displayTasks() {
   taskList.innerHTML = ""; // Clear current list
 
   taskArr.forEach((task, index) => {
-    // Task list item structure:
-    // <li id='${index}' class="disabled (if completed)">
-    //    <div class="task-content">
-    //      <label class="custom-checkbox">
-    //        <input type="checkbox"/>
-    //        <span class="checkmark"></span>
-    //      </label>
-    //      <span class="text-span">Task Text</span>
-    //      <div class="drag-div">drag icon</div>
-    //    </div>
-    // </li>
-
+    // Create list item
     const li = document.createElement("li");
     li.id = `${index}`;
     li.className = task.disabled ? "disabled" : "";
@@ -90,7 +85,7 @@ function displayTasks() {
     const taskContent = document.createElement("div");
     taskContent.className = "task-content";
 
-    // Custom checkbox label
+    // Create custom checkbox
     const label = document.createElement("label");
     label.className = "custom-checkbox";
 
@@ -100,41 +95,43 @@ function displayTasks() {
     checkbox.addEventListener("change", () => toggleTask(index));
 
     const checkmark = document.createElement("span");
-    checkmark.className = "checkmark"; // Styled in CSS
+    checkmark.className = "checkmark";
 
-    // Task text span
+    // Create task text
     const text = document.createElement("span");
     text.textContent = task.text;
     text.className = "text-span";
-    text.addEventListener("click", () => editTask(index)); // Enable editing on click
+    text.addEventListener("click", () => editTask(index));
 
+    // Create drag handle
     const drag = document.createElement("div");
     drag.textContent = "≡";
     drag.className = "drag-div";
 
-    // Assemble DOM elements
+    // Assemble task item
     label.append(checkbox, checkmark);
     taskContent.append(label, text, drag);
     li.appendChild(taskContent);
     taskList.appendChild(li);
   });
 
-  updateCount(); // Refresh counts
+  // Update task counts
+  updateCount();
 }
 
-// ✅ Toggle task completed/incomplete
+// Toggle task between completed and pending
 function toggleTask(taskIndex) {
   taskArr[taskIndex].disabled = !taskArr[taskIndex].disabled;
   saveToLocalStorage();
   displayTasks();
 }
 
-// 💾 Save current taskArr to local storage
+// Save the current task array to local storage
 function saveToLocalStorage() {
   localStorage.setItem("taskArr", JSON.stringify(taskArr));
 }
 
-// 🔢 Update task counts: total, completed, and pending
+// Update task counters: total, completed, and pending
 function updateCount() {
   taskCount.textContent = taskArr.length;
 
@@ -144,30 +141,30 @@ function updateCount() {
   pendingTaskCount.textContent = taskArr.length - completedCount;
 }
 
-// ✏️ Replace task text with input field for editing
+// Replace task text with an input field for editing
 function editTask(index) {
   const li = document.getElementById(index);
   const textSpan = li.querySelector(".task-content .text-span");
 
-  // Create an input to replace the text
+  // Create input element with existing task text
   const input = document.createElement("input");
   input.value = textSpan.textContent;
   input.className = "editTaskInput";
 
-  // Save on blur or Enter key
+  // Save changes on blur or when Enter is pressed
   input.addEventListener("blur", () => saveEdit(index, input));
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      input.blur(); // Triggers blur event
+      input.blur();
     }
   });
 
-  // Replace span with input field
+  // Replace the text span with input
   textSpan.replaceWith(input);
   input.focus();
 }
 
-// 💾 Save edited task text
+// Save the edited task text
 function saveEdit(index, inputElement) {
   const newText = inputElement.value.trim();
 
@@ -176,14 +173,16 @@ function saveEdit(index, inputElement) {
     saveToLocalStorage();
   }
 
-  displayTasks(); // Refresh the UI
+  displayTasks();
 }
 
+// Initialize sortable drag-and-drop functionality using SortableJS
 function initializeSortable() {
   Sortable.create(taskList, {
     animation: 150,
     handle: ".drag-div",
     onEnd: (e) => {
+      // Rebuild the task array based on new order
       taskArr.length = 0;
       const listItems = taskList.querySelectorAll("li");
 
@@ -201,8 +200,11 @@ function initializeSortable() {
   });
 }
 
+// Toggle between light and dark themes
 function toggleTheme() {
   document.body.classList.toggle("dark-mode");
+
+  // Save theme preference to local storage
   const theme = document.body.className === "dark-mode" ? "dark" : "light";
   localStorage.setItem("theme", theme);
 }
