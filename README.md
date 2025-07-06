@@ -20,7 +20,7 @@ Try it out here: [https://prathb.github.io/TODO-App/](https://prathb.github.io/T
 
 Light Mode | Dark Mode  
 :-------------------------:|:-------------------------:  
-![Light Mode](screenshot/screenshot-light.png) | ![Dark Mode](screenshot/screenshot-dark.png)
+![Light Mode](screenshots/screenshot-light.png) | ![Dark Mode](screenshots/screenshot-dark.png)
 
 ## Getting Started
 
@@ -37,7 +37,7 @@ No build tools or dependencies required!
 ├── styles.css      # All styles, including dark mode and toggle animation
 ├── script.js       # Main JavaScript logic
 ├── sortable.js     # SortableJS library (or loaded via CDN)
-├── screenshot/     # App screenshots
+├── screenshots/     # App screenshots
 └── README.md       # This file
 ```
 
