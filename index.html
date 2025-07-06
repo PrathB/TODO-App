@@ -7,9 +7,17 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
   </head>
-  <body class="dark-mode">
+  <body>
     <main class="main-card">
-      <h2>TO-DO LIST</h2>
+      <div class="header-div">
+        <h2>TO-DO LIST</h2>
+        <button id="themeToggle" class="theme-toggle">
+          <div class="toggle-slider">
+            <span class="toggle-icon">☀️</span>
+            <span class="toggle-icon">🌙</span>
+          </div>
+        </button>
+      </div>
       <div class="input-div">
         <input id="taskInput" type="text" placeholder="Add a task" />
         <button id="addTaskBtn">Add</button>
