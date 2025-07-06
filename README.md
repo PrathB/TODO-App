@@ -1,6 +1,6 @@
 # Todo App
 
-A lightweight, responsive, and modern Todo list application built with HTML, CSS, and JavaScript. Manage your daily tasks efficiently with a sleek UI, dark mode, and drag-and-drop sorting — all in your browser.
+A lightweight, responsive, and modern Todo list application built with HTML, CSS, and JavaScript. Manage your daily tasks efficiently with a sleek UI, dark mode, and drag and drop, sorting all in your browser.
 
 ## Features
 
