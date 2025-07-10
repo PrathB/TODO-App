@@ -36,7 +36,6 @@ No build tools or dependencies required!
 ├── index.html      # Main HTML file
 ├── styles.css      # All styles, including dark mode and toggle animation
 ├── script.js       # Main JavaScript logic
-├── sortable.js     # SortableJS library (or loaded via CDN)
 ├── screenshots/     # App screenshots
 └── README.md       # This file
 ```
